@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: no
+  become: true
+
+  # pre_tasks:
+  #   - name: check ubuntu release
+  #     raw: cat /etc/lsb-release | grep DISTRIB_RELEASE | cut -d "=" -f2
+  #     register: ubuntu_release
+  #     changed_when: false
+
+  #   - name: update apt cache
+  #     raw: apt-get update
+  #     changed_when: false
+
+  #   - name: install python
+  #     raw: apt-get install -yq python
+  #     when: "{{ ubuntu_release.stdout| version_compare('16.04', '>=') }}"
