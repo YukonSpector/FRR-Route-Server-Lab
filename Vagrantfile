@@ -1,6 +1,5 @@
 VAGRANTFILE_API_VERSION = "2"
 INTERNAL_NET_ONE = "100.100.100."
-DOMAIN = ".sample.com"
 BOX = "ubuntu/bionic64"
 HWVIRT = "on"
 CLIENT_COUNT = 4
@@ -26,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.vm.define machine[:hostname] do |node|
             node.vm.box = BOX
             node.vm.usable_port_range = (2200..2210)
-            node.vm.hostname = machine[:hostname] + DOMAIN
+            node.vm.hostname = machine[:hostname]
             node.vm.network "private_network", ip: machine[:peer_ip], virtualbox__intnet: "peering_fabric"
             node.vm.provider "virtualbox" do |vb|
                 vb.customize ["modifyvm", :id, "--memory", machine[:ram]]
@@ -45,7 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.vm.define "routeClient#{i}" do |client|
             client.vm.box = BOX
             client.vm.usable_port_range = (2211..2220)
-            client.vm.hostname = "routeClient" + "routeClient#{i}" + DOMAIN
+            client.vm.hostname = "routeClient#{i}"
             client.vm.network "private_network", ip: INTERNAL_NET_ONE + "#{i}", virtualbox__intnet: "peering_fabric"
             client.vm.provider "virtualbox" do |vb|
                 vb.customize ["modifyvm", :id, "--memory", CLIENT_RAM]
