@@ -36,6 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             if (!machine[:playbook].nil?)
                 node.vm.provision "ansible" do |ansible|
                     ansible.playbook = machine[:playbook]
+                    ansible.extra_vars = { ansible_python_interpreter:"/usr/bin/python3" }
                 end
             end
         end
@@ -54,6 +55,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             end
             client.vm.provision "ansible" do |ansible|
                 ansible.playbook = CLIENT_ANSIBLE
+                ansible.extra_vars = { ansible_python_interpreter:"/usr/bin/python3" }
             end
         end
     end
