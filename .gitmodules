@@ -1,0 +1,3 @@
+[submodule "docs/networking-icons"]
+	path = docs/networking-icons
+	url = git@github.com:network-automation/networking-icons.git
